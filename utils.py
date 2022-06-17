@@ -80,14 +80,19 @@ def plot_compare(t, y_true, y_pred, trace=None, min_trace=0, max_trace=1):
     trace = data['trace'].to_numpy()
     t = data.index.to_numpy()
 
-    LABEL_COLOR = {
-        "sleep": "tab:purple",
+    LABEL_COLOR_ALL = {
+        "sleep": "tab:blue",
         "sit-stand": "tab:red",
         "vehicle": "tab:brown",
         "mixed": "tab:orange",
         "walking": "tab:green",
         "bicycling": "tab:olive",
+        "sedentary": "tab:red",
+        "light": "tab:orange",
+        "moderate-vigorous": "tab:green",
     }
+    labels = np.unique(y_true)
+    LABEL_COLOR = {k: v for k,v in LABEL_COLOR_ALL.items() if k in labels}
 
     def ax_plot(ax, t, y, ylabel=None):
         labels = list(LABEL_COLOR.keys())
